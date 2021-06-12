@@ -10,6 +10,10 @@ import Foundation
 
 
 class InterfaceController: WKInterfaceController {
+    
+    @IBOutlet weak var table: WKInterfaceTable!
+    let animals = [("ネコ", "🐱"), ("イヌ", "🐶"), ("ハムスター", "🐹"), ("ドラゴン", "🐲"), ("ユニコーン", "🦄")]
+    let emojiAnimals = ["🐱", "🐶", "🐹", "🐲", "🦄"]
 
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
@@ -21,6 +25,11 @@ class InterfaceController: WKInterfaceController {
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
+    }
+    
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        let item = animals[rowIndex]
+        presentController(withName: "Forecast", context: item)
     }
 
 }
