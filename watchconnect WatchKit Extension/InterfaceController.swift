@@ -29,7 +29,7 @@ class InterfaceController: WKInterfaceController {
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         let item = animals[rowIndex]
-        presentController(withName: "Forecast", context: item)
+        presentController(withName: "Cell", context: item)
     }
 
 }

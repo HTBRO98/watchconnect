@@ -13,7 +13,7 @@
                     <items>
                         <table alignment="left" id="GN9-G5-ZWy">
                             <items>
-                                <tableRow id="VUw-A1-nn6">
+                                <tableRow id="VUw-A1-nn6" customClass="RowController" customModule="watchconnect_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="qw9-MG-iNJ">
                                         <items>
                                             <group width="50" height="20" alignment="center" verticalAlignment="center" layout="vertical" id="u9U-Et-Fq9">
@@ -28,6 +28,10 @@
                                             </group>
                                         </items>
                                     </group>
+                                    <connections>
+                                        <outlet property="emojiLabel" destination="arG-N6-opj" id="Aae-3Z-DPL"/>
+                                        <outlet property="nameLabel" destination="Twr-qu-Rgx" id="AkX-Jm-I9u"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
