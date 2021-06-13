@@ -12,11 +12,12 @@ class RowController: NSObject {
     @IBOutlet weak var nameLabel: WKInterfaceLabel!
     @IBOutlet weak var emojiLabel: WKInterfaceLabel!
     
-    var data: (String, String) {
+    var data: (String, String)? {
         didSet {
+            guard let data = data else { return }
             nameLabel.setText(data.0)
             emojiLabel.setText(data.1)
         }
     }
-    
+        
 }
