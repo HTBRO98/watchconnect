@@ -21,6 +21,11 @@ class InterfaceController: WKInterfaceController {
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
+        table.setNumberOfRows(animals.count, withRowType: "Row")
+        for i in 0 ..< table.numberOfRows {
+            guard let controller = table.rowController(at: i) as? RowController else { continue }
+            controller.data = animals[i]
+        }
     }
     
     override func didDeactivate() {

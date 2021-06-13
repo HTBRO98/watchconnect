@@ -13,7 +13,7 @@
                     <items>
                         <table alignment="left" id="GN9-G5-ZWy">
                             <items>
-                                <tableRow id="VUw-A1-nn6" customClass="RowController" customModule="watchconnect_WatchKit_Extension">
+                                <tableRow identifier="Row" id="VUw-A1-nn6" customClass="RowController" customModule="watchconnect_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="qw9-MG-iNJ">
                                         <items>
                                             <group width="50" height="20" alignment="center" verticalAlignment="center" layout="vertical" id="u9U-Et-Fq9">
