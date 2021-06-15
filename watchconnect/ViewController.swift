@@ -9,10 +9,14 @@ import UIKit
 import WatchConnectivity
 
 class ViewController: UIViewController {
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let watchConnector = WatchConnector()
     }
 
 
@@ -41,8 +45,20 @@ class WatchConnector: NSObject, WCSessionDelegate {
         print("sessionDidDeactivate")
     }
     
+    //func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    //    DispatchQueue.main.async {
+    //        let data = message["MESSAGE"] as! String
+    //        print("didReceiveMessage: \(data)")
+    //    }
+        
+    //    replyHandler(["message" : "replyHandler"])
+    //}
+    
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print("didReceiveMessage: \(message)")
+        DispatchQueue.main.async {
+            let data = message["MESSAGE"] as! String
+            print("didReceiveMessage: \(data)")
+        }
     }
     
     
