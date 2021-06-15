@@ -13,6 +13,8 @@ import Foundation
 class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
+    
+    let phoneconnector = PhoneConnector()
     let animals = [("ネコ", "🐱"), ("イヌ", "🐶"), ("ハムスター", "🐹"), ("ドラゴン", "🐲"), ("ユニコーン", "🦄")]
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
@@ -32,8 +34,9 @@ class InterfaceController: WKInterfaceController {
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
-        let item = animals[rowIndex]
-        presentController(withName: "Cell", context: item)
+        phoneconnector.send(index: rowIndex, animals: animals)
+        //let item = animals[rowIndex]
+        //presentController(withName: "Cell", context: item)
     }
 
 }
@@ -59,7 +62,7 @@ class PhoneConnector: NSObject, WCSessionDelegate {
         }
     }
     
-    private func send(index: Int, animals : [(String, String)]) {
+    func send(index: Int, animals : [(String, String)]) {
         let animal: (String, String) = animals[index]
         let message = ["message": animal]
         if WCSession.default.isReachable {
