@@ -6,6 +6,7 @@
 //
 
 import WatchKit
+import WatchConnectivity
 import Foundation
 
 
@@ -13,8 +14,6 @@ class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var table: WKInterfaceTable!
     let animals = [("ネコ", "🐱"), ("イヌ", "🐶"), ("ハムスター", "🐹"), ("ドラゴン", "🐲"), ("ユニコーン", "🦄")]
-    let emojiAnimals = ["🐱", "🐶", "🐹", "🐲", "🦄"]
-
     override func awake(withContext context: Any?) {
         // Configure interface objects here.
     }
@@ -37,4 +36,37 @@ class InterfaceController: WKInterfaceController {
         presentController(withName: "Cell", context: item)
     }
 
+}
+
+class PhoneConnector: NSObject, WCSessionDelegate {
+    
+    var session: WCSession
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("The session has completed activation.")
+                }
+    }
+    
+    init(session: WCSession = .default) {
+        self.session = session
+        super.init()
+        if WCSession.isSupported() {
+            self.session.delegate = self
+            WCSession.default.activate()
+        }
+    }
+    
+    private func send(index: Int, animals : [(String, String)]) {
+        let animal: (String, String) = animals[index]
+        let message = ["message": animal]
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(message, replyHandler: nil) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
 }
