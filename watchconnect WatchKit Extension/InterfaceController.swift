@@ -67,13 +67,13 @@ class PhoneConnector: NSObject, WCSessionDelegate {
         let animal: (String, String) = animals[index]
         let message = ["MESSAGE": "Hello iPhone!!"]
         DispatchQueue.main.async {
-            if WCSession.default.isReachable {
+//            if WCSession.default.isReachable {
                 WCSession.default.sendMessage(message, replyHandler: { (reply) in do {
                     print("send to replyHandler")
                 }}) { (error) in
                     print(error.localizedDescription)
                 }
-            }
+//            }
         }
     }
     
