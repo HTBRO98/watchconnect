@@ -47,6 +47,12 @@ class PhoneConnector: NSObject, WCSessionDelegate {
     var session: WCSession
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if activationState == .activated {
+                    print("isActivated")
+        } else {
+                    print("is not Activated")
+        }
+        
         if let error = error {
                     print(error.localizedDescription)
                 } else {
@@ -67,13 +73,13 @@ class PhoneConnector: NSObject, WCSessionDelegate {
         let animal: (String, String) = animals[index]
         let message = ["MESSAGE": "Hello iPhone!!"]
         DispatchQueue.main.async {
-//            if WCSession.default.isReachable {
+            if WCSession.default.isReachable {
                 WCSession.default.sendMessage(message, replyHandler: { (reply) in do {
                     print("send to replyHandler")
                 }}) { (error) in
                     print(error.localizedDescription)
                 }
-//            }
+            }
         }
     }
     
