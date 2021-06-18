@@ -10,19 +10,24 @@ import WatchConnectivity
 
 class ViewController: UIViewController {
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //let watchConnector = WatchConnector()
     }
-
-
+    
 }
 
-class WatchConnector: NSObject, WCSessionDelegate {
+class WatchConnector: NSObject, ObservableObject, WCSessionDelegate {
+    
+    @Published var receivedMessage = "WATCH : 未受信"
+    @Published var count = 0
+
+    
+    var dataM: String = "" {
+        didSet {
+            print("receive data: \(dataM)")
+        }
+    }
     
     override init() {
         super.init()
@@ -46,10 +51,14 @@ class WatchConnector: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             print("message rowdata : \(message)")
             let data = message["MESSAGE"] as! String
             print("didReceiveMessage: \(data)")
+            dataM = message["MESSAGE"] as! String
+            
+            self.receivedMessage = "PHONE : \(message["MESSAGE"] as! String)"
+            print("self.receivedMessage \(self.receivedMessage)")
         }
         
         replyHandler(["MESSAGE" : "replyHandler"])
