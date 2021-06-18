@@ -46,11 +46,11 @@ class WatchConnector: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
- //       DispatchQueue.main.async {
+        DispatchQueue.main.async {
             print("message rowdata : \(message)")
             let data = message["MESSAGE"] as! String
             print("didReceiveMessage: \(data)")
-//        }
+        }
         
         replyHandler(["MESSAGE" : "replyHandler"])
     }

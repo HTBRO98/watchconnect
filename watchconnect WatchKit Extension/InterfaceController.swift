@@ -72,7 +72,7 @@ class PhoneConnector: NSObject, WCSessionDelegate {
     func send(index: Int, animals : [(String, String)]) {
         let animal: (String, String) = animals[index]
         let message = ["MESSAGE": "Hello iPhone!!"]
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             if WCSession.default.isReachable {
                 WCSession.default.sendMessage(message, replyHandler: { (reply) in do {
                     print("send to replyHandler")
@@ -87,7 +87,7 @@ class PhoneConnector: NSObject, WCSessionDelegate {
                         print(error)
                     }}
             )}
-//        }
+        }
     }
     
 }
