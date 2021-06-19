@@ -56,7 +56,7 @@ class WatchConnector: NSObject, ObservableObject, WCSessionDelegate {
             let data = message["MESSAGE"] as! String
             print("didReceiveMessage: \(data)")
             dataM = message["MESSAGE"] as! String
-            
+            dataM = message["MESSAGE"] as! String
             self.receivedMessage = "PHONE : \(message["MESSAGE"] as! String)"
             print("self.receivedMessage \(self.receivedMessage)")
         }
