@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
 class WatchConnector: NSObject, ObservableObject, WCSessionDelegate {
     
-    @Published var receivedMessage = "WATCH : 未受信"
+    @Published var receivedMessage = "PHONE : 未受信"
     @Published var count = 0
 
     
@@ -51,6 +51,7 @@ class WatchConnector: NSObject, ObservableObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        print("message by Watch : \(message)")
         DispatchQueue.main.async { [self] in
             print("message rowdata : \(message)")
             let data = message["MESSAGE"] as! String
@@ -60,7 +61,7 @@ class WatchConnector: NSObject, ObservableObject, WCSessionDelegate {
             print("self.receivedMessage \(self.receivedMessage)")
         }
         
-        replyHandler(["MESSAGE" : "replyHandler"])
+        replyHandler(["MESSAGE" : "iphoneから返事を送ります。"])
     }
     
     //func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
